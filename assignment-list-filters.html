@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Connect HTMLs</title>
+    <link rel="stylesheet" type="text/css" href="assets/connect.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.runtime.min.js"></script>
+    <script type="text/javascript" src="hbs.js"></script>
+    <script src="helpers.js"></script>
+
+    <script type="text/javascript">
+      // Launch given hash template
+      function launch () {
+        var hash;
+        var json;
+        var template;
+        var html;
+
+        hash = location.hash.replace(/#/, '') || 'index';
+        json = parseLink(hash);
+        template = HBS[json.templateName];
+        html = template(json.templateData);
+        //document.querySelector('.template-holder').innerHTML = html;
+      }
+      // Parse the link into HBS input json
+      function parseLink (hash) {
+        var search = hash.split('?')[1];
+        var template = hash.split('?')[0];
+        var queries, data = {};
+        if (search) {
+          queries = search.split('&');
+          for (var q = 0; q < queries.length; q += 1) {
+            var key = queries[q].split('=')[0];
+            var value = queries[q].split('=')[1];
+            data[key] = value;
+          }
+        }
+        return {
+          templateName: template,
+          templateData: data
+        }
+      }
+    </script>
+  </head>
+  <body onhashchange="launch();" onload="launch();">
+
+    <div class="layoutWrapper"> <!-- layoutWrapper div: Starts-->
+    
+      <div class="leftMenu active"> <!-- leftMenu div: Starts-->
+        <div class="">
+          <button class="menuIcon"><span class="icon-menu_hamburger"></span></button>
+        </div>
+        <div class="menuPanel">
+          <ul class="menuDropdown large-text">
+            <li class="menuDropdownList">
+              <div class="menuLabel font-soft-bold">
+                <span class="menuLabel-icon icon-user-avatar"></span>
+                <button class="menuLabel-button">
+                  George Lucas
+                  <span class="icon-expand-collapse pull-right menuLabel-arrow"></span>
+                </button>
+              </div>
+              <div class="innerDropdown medium-text font-soft-regular">
+                <button class="innerDropdownList menuLabel-button">Messages</button>
+                <button class="innerDropdownList menuLabel-button">Notifications</button>
+                <button class="innerDropdownList menuLabel-button">My Account</button>
+                <button class="innerDropdownList menuLabel-button">Help</button>
+              </div>
+            </li>
+            <li class="menuDropdownList innerMenu-active">
+              <div class="menuLabel font-soft-bold">
+                <span class="menuLabel-icon icon-expected-time-complete"></span>
+                <button class="menuLabel-button">
+                  Assignments
+                  <span class="icon-expand-collapse pull-right menuLabel-arrow"></span>
+                </button>
+              </div>
+              <div class="innerDropdown medium-text font-soft-regular">
+                <button class="innerDropdownList menuLabel-button">Messages</button>
+                <button class="innerDropdownList menuLabel-button">Notifications</button>
+                <button class="innerDropdownList menuLabel-button">My Account</button>
+                <button class="innerDropdownList menuLabel-button">Help</button>
+              </div>
+            </li>
+            <li class="menuDropdownList innerMenu-active">
+              <div class="menuLabel font-soft-bold">
+                <span class="menuLabel-icon icon-classes"></span>
+                <button class="menuLabel-button">
+                  Classes
+                  <span class="icon-expand-collapse pull-right menuLabel-arrow"></span>
+                </button>
+              </div>
+              <div class="innerDropdown medium-text font-soft-regular">
+                <button class="innerDropdownList menuLabel-button">Messages</button>
+                <button class="innerDropdownList menuLabel-button">Notifications</button>
+                <button class="innerDropdownList menuLabel-button">My Account</button>
+                <button class="innerDropdownList menuLabel-button">Help</button>
+              </div>
+            </li>
+            <li class="menuDropdownList">
+              <div class="menuLabel font-soft-bold">
+                <span class="menuLabel-icon icon-results"></span>
+                <button class="menuLabel-button">
+                  Results
+                </button>
+              </div>
+            </li>
+            <li class="menuDropdownList">
+              <div class="menuLabel font-soft-bold">
+                <span class="menuLabel-icon icon-results-1"></span>
+                <button class="menuLabel-button">
+                  Insight
+                </button>
+              </div>
+            </li>
+            <li class="menuDropdownList logOut-app">
+              <div class="menuLabel font-soft-bold">
+                <span class="menuLabel-icon icon-results-1"></span>
+                <button class="menuLabel-button">
+                  Log Out
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="menuLogo">
+          <span class="connect-logo-panel">
+            <span class="icon-mghe_logo custom"></span><span class="icon-connect_logo custom"></span>
+          </span>
+          <div class="footerLinks small-text">
+            <div>
+              <a href="https://www.mheducation.com/terms-use.html?external_browser=2">Terms of Use</a>
+              <a href="https://www.mheducation.com/privacy.html?external_browser=2">Privacy Notice</a>
+            </div>
+          </div>
+        </div>
+      </div> <!-- leftMenu div: Ends-->
+    
+      <div class="mainContentsWrapper"> <!-- mainContentsWrapper div: Starts--> 
+      
+        <div class="row-offcanvas row-offcanvas-left connect-assignment-wrapper active"> <!-- connect-assignment-wrapper div: Starts--> 
+        
+          <div class="relative-block"> <!--relative-block div: Starts-->
+          
+            <aside class="row" role="navigation"> <!-- Filter section code: Starts-->
+              <div class="medium-text filter-messages-container sidebar-offcanvas-left">
+                <div class="medium-text filter-panel row-offcanvas active">
+                  <div class="bold filter-panel-header">
+                    Filter
+                    <a href="javascript:;" class="icon-close pull-right small-text close-filter-panel" target="_blank"></a>
+                  </div>
+                  <label class="filter-events active">
+                    All Classes
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="English 2015 -16" class="filter-events active">
+                    <!--<span class="colorable-style-7">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">English 2015 -16</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                  <label title="Spanish course" class="filter-events active">
+                    <!--<span class="colorable-style-4">&nbsp;&nbsp;</span>
+                    &nbsp;-->
+                    <div class="filter-name ellipsis inline-block">Spanish course</div>
+                    <!--<a href="javascript:;" class="pull-right filter-selector selector">
+                      <span class="selected icon-success"></span>
+                    </a>-->
+                    <input type="checkbox" class="pull-right filter-selector" checked />
+                  </label>
+                </div>
+              </div> 
+            </aside> <!-- Filter section code: Ends-->
+          
+            <div class="container-fluid connect-assignment-container connect-result-wrapper"> <!--connect-assignment-container div: Starts-->
+              <div class="AssignmentRow"> <!--AssignmentRow div: Starts-->
+                <div class="stage-date-header">
+                  <div class="x-large-text text-right stage-date">
+                    Monday, October 26, 2015
+                  </div>
+                </div>
+                <div class="stage-assignment-header">
+                  <div class="medium-text">
+                    <span class="font-bold large-text stage-assignment-status">Late Assignments</span><span>Past due date</span>
+                  </div>
+                </div>
+                <div class="assignment-tile">
+                  <div class="default-text assignment-tile-title">
+                    <div class="medium-text font-bold tile-header">
+                      Introduction to early hominid social structure and the impact of genetic group
+                    </div>
+                    <div class="row tile-remaining">
+                      <div class="tile-remaining-alert pull-left">
+                        <span class="small-text tile-late-alert">
+                          LATE
+                        </span>
+                      </div>
+                      <ul class="task-tile-remaining pull-left">
+                        <li>
+                          <span class="font-bold tile-late-info">
+                            DUE: 12/19/2015
+                          </span>
+                          <span class="tile-attempts-remaining">
+                            1 / 3 ATTEMPTS REMAINING
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="default-text assignment-tile-details">
+                    <div class="tile-type">
+                      FILE ATTACHMENT
+                    </div>
+                    <div class="font-bold tile-links">
+                      <span>NATURAL SCIENCES</span>  |  <span>SECTION 123456789</span>
+                    </div>
+                  </div>
+                  <div class="action-arrow text-center">
+                      <a class="action-button">
+                        <span class="icon-arrow-button"></span>
+                      </a>
+                    </div>
+                </div>
+                <div class="assignment-tile">
+                  <div class="default-text assignment-tile-title">
+                    <div class="medium-text font-bold tile-header">
+                      General Practices Pt. 1: Driving the World to the Core of the Earth
+                    </div>
+                    <div class="row tile-remaining">
+                      <div class="tile-remaining-alert pull-left">
+                        <span class="small-text tile-late-alert">
+                          LATE
+                        </span>
+                      </div>
+                      <ul class="pull-left task-tile-remaining task-tile-multiple">
+                        <li>
+                          <span class="font-bold tile-late-info">
+                            DUE: 12/19/2015
+                          </span>
+                        </li>
+                        <li>
+                          <span class="font-bold tile-date-info">
+                            NEXT TASK DUE: 12/20
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="default-text assignment-tile-details">
+                    <div class="tile-type">
+                      WRITING ASSIGNMENT
+                    </div>
+                    <div class="font-bold tile-links">
+                      <span>NATURAL SCIENCES</span>  |  <span>SECTION 123456789</span>
+                    </div>
+                  </div>
+                  <div class="action-arrow text-center">
+                      <a class="action-button">
+                        <span class="icon-arrow-button"></span>
+                      </a>
+                    </div>
+                </div>
+              
+                <div class="stage-assignment-header">
+                  <div class="medium-text">
+                    <span class="font-bold large-text stage-assignment-status">Due Soon</span><span>Assignments due in the next 7 days</span>
+                  </div>
+                </div>
+                <div class="assignment-tile">
+                  <div class="default-text assignment-tile-title">
+                    <div class="medium-text font-bold tile-header">
+                      Introduction to early hominid social structure and the impact of genetic group
+                    </div>
+                    <div class="row tile-remaining">
+                      <ul class="task-tile-remaining">
+                        <li>
+                          <span class="font-bold tile-date-info">
+                            DUE: 12/19/2015
+                          </span>
+                          <span class="tile-attempts-remaining">
+                            1 / 3 ATTEMPTS REMAINING
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="default-text assignment-tile-details">
+                    <div class="tile-type">
+                      FILE ATTACHMENT
+                    </div>
+                    <div class="font-bold tile-links">
+                      <span>NATURAL SCIENCES</span>  |  <span>SECTION 123456789</span>
+                    </div>
+                  </div>
+                  <div class="action-arrow text-center">
+                      <a class="action-button">
+                        <span class="icon-arrow-button"></span>
+                      </a>
+                    </div>
+                </div>
+                <div class="assignment-tile">
+                  <div class="default-text assignment-tile-title">
+                    <div class="medium-text font-bold tile-header">
+                      General Practices Pt. 1: Driving the World to the Core of the Earth
+                    </div>
+                    <div class="row tile-remaining">
+                      <ul class="pull-left task-tile-remaining task-tile-multiple">
+                        <li>
+                          <span class="font-bold tile-date-info">
+                            DUE: 12/19/2015
+                          </span>
+                        </li>
+                        <li>
+                          <span class="font-bold tile-date-info">
+                            NEXT TASK DUE: 12/20
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="default-text assignment-tile-details">
+                    <div class="tile-type">
+                      WRITING ASSIGNMENT
+                    </div>
+                    <div class="font-bold tile-links">
+                      <span>NATURAL SCIENCES</span>  |  <span>SECTION 123456789</span>
+                    </div>
+                  </div>
+                  <div class="action-arrow text-center">
+                      <a class="action-button">
+                        <span class="icon-arrow-button"></span>
+                      </a>
+                    </div>
+                </div>
+              
+                <div class="stage-assignment-header">
+                  <div class="medium-text">
+                    <span class="font-bold large-text stage-assignment-status">Further Study</span><span>Recharge and Study mode assignments</span>
+                  </div>
+                </div>
+                <div class="assignment-tile">
+                  <div class="default-text assignment-tile-title">
+                    <div class="medium-text font-bold tile-header">
+                      Introduction to early hominid social structure and the impact of genetic group
+                    </div>
+                    <div class="row tile-remaining">
+                      <div class="tile-remaining-alert pull-left">
+                        <span class="small-text tile-study-alert">
+                          RECHARGE
+                        </span>
+                      </div>
+                      <ul class="task-tile-remaining pull-left">
+                        <li>
+                          <span class="font-bold tile-date-info">
+                            DUE: 12/19/2015
+                          </span>
+                          <span class="tile-attempts-remaining">
+                            1 / 3 ATTEMPTS REMAINING
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="default-text assignment-tile-details">
+                    <div class="tile-type">
+                      FILE ATTACHMENT
+                    </div>
+                    <div class="font-bold tile-links">
+                      <span>NATURAL SCIENCES</span>  |  <span>SECTION 123456789</span>
+                    </div>
+                  </div>
+                  <div class="action-arrow text-center">
+                      <a class="action-button">
+                        <span class="icon-arrow-button"></span>
+                      </a>
+                    </div>
+                </div>
+                <div class="assignment-tile">
+                  <div class="default-text assignment-tile-title">
+                    <div class="medium-text font-bold tile-header">
+                      Introduction to early hominid social structure and the impact of genetic group
+                    </div>
+                    <div class="row tile-remaining">
+                      <div class="tile-remaining-alert pull-left">
+                        <span class="small-text tile-study-alert">
+                          STUDY
+                        </span>
+                      </div>
+                      <ul class="task-tile-remaining pull-left">
+                        <li>
+                          <span class="font-bold tile-date-info">
+                            DUE: 12/19/2015
+                          </span>
+                          <span class="tile-attempts-remaining">
+                            1 / 3 ATTEMPTS REMAINING
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="default-text assignment-tile-details">
+                    <div class="tile-type">
+                      FILE ATTACHMENT
+                    </div>
+                    <div class="font-bold tile-links">
+                      <span>NATURAL SCIENCES</span>  |  <span>SECTION 123456789</span>
+                    </div>
+                  </div>
+                  <div class="action-arrow text-center">
+                      <a class="action-button">
+                        <span class="icon-arrow-button"></span>
+                      </a>
+                    </div>
+                </div>
+              </div> <!--AssignmentRow div: Ends-->
+            </div> <!--connect-assignment-container div: Ends-->
+          
+          </div> <!--relative-block div: Ends -->
+        
+        </div> <!-- connect-assignment-wrapper div: Ends--> 
+    
+      </div> <!-- mainContentsWrapper div: Ends-->
+    
+    </div> <!-- layoutWrapper div: Ends-->
+
+  </body>
+</html>
